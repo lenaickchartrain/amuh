@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('amuh_journee_index') }}">journée</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Utilisateur <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('amuh_utilisateur_add') }}">Ajouter</a></li>
+                        <li><a href="{{ path('amuh_utilisateur_list') }}">Afficher</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Médecin <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('amuh_medecin_add') }}">Ajouter</a></li>
+                        <li><a href="{{ path('amuh_medecin_list') }}">Afficher</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catégorie Attribut <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('amuh_categorieattribut_add') }}">Ajouter</a></li>
+                        <li><a href="{{ path('amuh_categorieattribut_list') }}">Afficher</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attribut <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('amuh_attribut_add') }}">Ajouter</a></li>
+                        <li><a href="{{ path('amuh_attribut_list') }}">Afficher</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Type de journée <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('amuh_typejournee_add') }}">Ajouter</a></li>
+                        <li><a href="{{ path('amuh_typejournee_list') }}">Afficher</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Name <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                          <li><a href="#">Profil</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="{{ path('logout') }}">Deconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

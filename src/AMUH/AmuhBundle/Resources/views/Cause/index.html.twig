@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - User - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux causes
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_cause_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_cause_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for cause in causes %}
+        <tr><td>{{ cause.idCause }}</td><td>{{ cause.cauLibelle }}</td><td> {{ cause.cauEtat }}</td><td><a href="{{ path('amuh_cause_edit',{'idCause': cause.idCause}) }}">Editer</a></td><td><a href="{{ path('amuh_cause_delete', {'idCause': cause.idCause}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+    
+{% endblock %}

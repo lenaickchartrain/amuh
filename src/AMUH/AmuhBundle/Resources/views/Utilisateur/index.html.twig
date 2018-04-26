@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Utilisateur - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux utilisateurs
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_utilisateur_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_utilisateur_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for utilisateur in utilisateurs %}
+		{{ dump(utilisateur) }}
+        <tr><td>{{ utilisateur.idUtilisateur }}</td><td>{{ utilisateur.prsNom }} {{ utilisateur.prsPrenom }}</td><td> {{ utilisateur.usrEtat }}</td><td><a href="{{ path('amuh_utilisateur_edit',{ 'idUtilisateur': utilisateur.idUtilisateur }) }}">Editer</a></td><td><a href="{{ path('amuh_utilisateur_delete', { 'idUtilisateur': utilisateur.idUtilisateur }) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

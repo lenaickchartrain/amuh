@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Medecin - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux medecins
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_medecin_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_medecin_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    <div>{{ dump(medecins) }}</div>
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for medecin in medecins %}
+        <tr><td>{{ medecin.idMedecin }}</td><td>{{ medecin.prsNom }} {{ medecin.prsPrenom }}</td><td> {{ medecin.medEtat }}</td><td><a href="{{ path('amuh_medecin_edit',{'idMedecin': medecin.idMedecin}) }}">Editer</a></td><td><a href="{{ path('amuh_medecin_delete', {'idMedecin': medecin.idMedecin}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

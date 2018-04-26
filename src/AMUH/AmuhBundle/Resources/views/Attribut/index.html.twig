@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - User - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux comptes
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_attribut_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_attribut_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for attribut in attributs %}
+        <tr><td>{{ attribut.idAttribut }}</td><td>{{ attribut.atbLibelle }}</td><td> {{ attribut.atbEtat }}</td><td><a href="{{ path('amuh_attribut_edit',{'idAttribut': attribut.idAttribut}) }}">Editer</a></td><td><a href="{{ path('amuh_attribut_delete', {'idAttribut': attribut.idAttribut}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+    
+{% endblock %}

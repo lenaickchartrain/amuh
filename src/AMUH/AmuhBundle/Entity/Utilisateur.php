@@ -1,0 +1,258 @@
+<?php
+
+namespace AMUH\AmuhBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+
+/**
+ * Utilisateur
+ *
+ * @ORM\Entity(repositoryClass="AMUH\AmuhBundle\Repository\UtilisateurRepository")
+ */
+class Utilisateur extends Personne implements AdvancedUserInterface
+{
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="id_utilisateur", type="guid")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    private $idUtilisateur;
+	
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_email", type="string", length=50)
+     */
+    private $usrEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_password", type="string", length=60)
+     */
+    private $usrPassword;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_salt", type="string", length=60, nullable=true)
+     */
+    private $usrSalt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_etat", type="string", length=7)
+     */
+    private $usrEtat;
+    
+    /**
+     * Many Utilisateurs have many Roles.
+     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\JoinTable(name="utilisateurs_roles",
+     *  joinColumns={@ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id_utilisateur")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="id_role", referencedColumnName="id_role")}
+     * )
+     */
+    private $roles;
+
+    /**
+     * Set usrEmail
+     *
+     * @param string $usrEmail
+     *
+     * @return Utilisateur
+     */
+    public function setUsrEmail($usrEmail)
+    {
+        $this->usrEmail = $usrEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get usrEmail
+     *
+     * @return string
+     */
+    public function getUsrEmail()
+    {
+        return $this->usrEmail;
+    }
+
+    /**
+     * Set usrPassword
+     *
+     * @param string $usrPassword
+     *
+     * @return Utilisateur
+     */
+    public function setUsrPassword($usrPassword)
+    {
+        $this->usrPassword = $usrPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get usrPassword
+     *
+     * @return string
+     */
+    public function getUsrPassword()
+    {
+        return $this->usrPassword;
+    }
+
+    /**
+     * Set usrEtat
+     *
+     * @param string $usrEtat
+     *
+     * @return Utilisateur
+     */
+    public function setUsrEtat($usrEtat)
+    {
+        $this->usrEtat = $usrEtat;
+
+        return $this;
+    }
+
+    /**
+     * Get usrEtat
+     *
+     * @return string
+     */
+    public function getUsrEtat()
+    {
+        return $this->usrEtat;
+    }
+
+    /**
+     * Get idUtilisateur
+     *
+     * @return guid
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add role
+     *
+     * @param \AMUH\AmuhBundle\Entity\Role $role
+     *
+     * @return Utilisateur
+     */
+    public function addRole(\AMUH\AmuhBundle\Entity\Role $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \AMUH\AmuhBundle\Entity\Role $role
+     */
+    public function removeRole(\AMUH\AmuhBundle\Entity\Role $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->getRolesToArray();
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getPassword() {
+        return $this->usrPassword;
+    }
+
+    public function getSalt() {
+        return $this->usrSalt;
+    }
+
+    public function getUsername() {
+        return $this->usrEmail;
+    }
+
+    private function getRolesToArray(){
+        $roles = [];
+        foreach ($this->roles as $role) {
+            $roles[] = $role->getRolLibelle();
+        }
+        return $roles;
+    }
+
+    /**
+     * Set usrSalt
+     *
+     * @param string $usrSalt
+     *
+     * @return Utilisateur
+     */
+    public function setUsrSalt($usrSalt)
+    {
+        $this->usrSalt = $usrSalt;
+
+        return $this;
+    }
+
+    /**
+     * Get usrSalt
+     *
+     * @return string
+     */
+    public function getUsrSalt()
+    {
+        return $this->usrSalt;
+    }
+
+    public function isAccountNonExpired() {
+        return true;
+    }
+
+    public function isAccountNonLocked() {
+        return true;
+    }
+
+    public function isCredentialsNonExpired() {
+        return true;
+    }
+
+    public function isEnabled() {
+        switch($this->usrEtat){
+            case 'ACTIF':
+                return true;
+            case 'INACTIF':
+                return false;
+            case 'WAITING':
+                return true;
+            default:
+                return false;
+        }
+    }
+
+}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Personne - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux personnes
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_personne_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_personne_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for personne in personnes %}
+        <tr><td>{{ personne.idPersonne }}</td><td>{{ personne.prsNom }} {{ personne.prsPrenom }}</td><td> {{ personne.prsEtat }}</td><td><a href="{{ path('amuh_personne_edit',{'idPersonne': personne.idPersonne}) }}">Editer</a></td><td><a href="{{ path('amuh_personne_delete', {'idPersonne': personne.idPersonne}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

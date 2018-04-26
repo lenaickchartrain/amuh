@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - User - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux comptes
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_consultation_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_attribut_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <div>
+        {{ dump(journeeorderby) }}
+    </div>
+    
+    <div>{{ journee.jouDate|date('d/m/Y') }}</div>
+    {#{ dump(journee) }#}
+    <div>
+        {% for secretaire in journee.secretaires %}
+            <span>{{ secretaire.prsNomPrenom }}</span>
+        {% endfor %}
+    </div>
+    
+    <div>
+        {% for medecin in journee.medecins %}
+            <span>{{ medecin.prsNomPrenom }}</span>
+        {% endfor %}
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Médecin</th><th colspan="10">Patient</th><th>Etat</th><th>Editer</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for consultation in journee.consultations %}
+         <tr>
+             <td>{{ consultation.idConsultation }}</td>
+             <td>{% if consultation.medecin.prsNom is defined %}{{ consultation.medecin.prsNom }}{% endif %} {% if consultation.medecin.prsPrenom is defined %}{{ consultation.medecin.prsPrenom }}{% endif %}</td>
+            {% for consultationData in consultation.consultationDatas %}
+                <td>
+                    {% if consultationData.csdValeur is orientation %}
+                        {{ consultationData.csdValeur.oriLibelle }}
+                    {% elseif consultationData.csdValeur is cause %}
+                        {{ consultationData.csdValeur.cauLibelle }}
+                    {% elseif consultationData.csdValeur is modalitereglement %}
+                        {{ consultationData.csdValeur.moreLibelle }}
+                    {% else %}
+                        {{ consultationData.csdValeur }}
+                    {% endif %}
+                    
+                </td>
+                
+            {% endfor %}
+            <td> {{ consultation.cstEtat }}</td>
+            <td><a href="{{ path('amuh_consultation_edit',{'idConsultation': consultation.idconsultation}) }}">Editer</a></td>
+            <td><a href="{{ path('amuh_consultation_delete', {'idConsultation': consultation.idConsultation}) }}">Supprimer</a></td>
+         </tr>
+    {% endfor %}
+    
+    
+{% endblock %}

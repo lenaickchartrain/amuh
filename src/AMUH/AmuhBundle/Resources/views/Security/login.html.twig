@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        {# S'il y a une erreur, on l'affiche dans un joli cadre #}
+        {% if error %}
+          <div class="alert alert-danger">{{ error.message }}</div>
+        {% endif %}
+
+        {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
+        <div class="container">
+            <div class="card card-container">
+                <p id="profile-name" class="profile-name-card"></p>
+                <form class="form-signin" action="{{ path('login_check') }}" method="post">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" id="username" name="_username" class="form-control" placeholder="Email address" value="{{ last_username }}" required autofocus>
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"> Connexion </button>
+                </form>
+                <a href="#" class="forgot-password">
+                    Forgot the password?
+                </a>
+            </div><!-- /card-container -->
+        </div><!-- /container -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Categorie Attribut - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux catégories d'attribut
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_categorieattribut_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_categorieattribut_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for categorieAttribut in categorieAttributs %}
+        <tr><td>{{ categorieAttribut.idCategorieAttribut }}</td><td>{{ categorieAttribut.catLibelle }}</td><td> {{ categorieAttribut.catEtat }}</td><td><a href="{{ path('amuh_categorieattribut_edit',{'idCategorieAttribut': categorieAttribut.idCategorieAttribut}) }}">Editer</a></td><td><a href="{{ path('amuh_categorieattribut_delete', {'idCategorieAttribut': categorieAttribut.idCategorieAttribut}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

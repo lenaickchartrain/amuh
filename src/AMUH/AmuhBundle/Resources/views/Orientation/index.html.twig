@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - User - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux orientations
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_orientation_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_orientation_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for orientation in orientations %}
+        <tr><td>{{ orientation.idOrientation }}</td><td>{{ orientation.oriLibelle }}</td><td> {{ orientation.oriEtat }}</td><td><a href="{{ path('amuh_orientation_edit',{'idOrientation': orientation.idOrientation}) }}">Editer</a></td><td><a href="{{ path('amuh_orientation_delete', {'idOrientation': orientation.idOrientation}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+    
+{% endblock %}

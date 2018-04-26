@@ -1,0 +1,19 @@
+amuh:
+    resource: "@AmuhBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+#app:
+#    resource: '@AppBundle/Controller/'
+#    type: annotation
+
+login:
+    path: /login
+    defaults:
+        _controller: AmuhBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modalité de Règlement - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux modalité de règlement
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_modalitereglement_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_modalitereglement_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for modaliteReglement in modaliteReglements %}
+        <tr><td>{{ modaliteReglement.idModaliteReglement }}</td><td>{{ modaliteReglement.moreLibelle }}</td><td> {{ modaliteReglement.moreEtat }}</td><td><a href="{{ path('amuh_modalitereglement_edit',{'idModaliteReglement': modaliteReglement.idModaliteReglement}) }}">Editer</a></td><td><a href="{{ path('amuh_modalitereglement_delete', {'idModaliteReglement': modaliteReglement.idModaliteReglement}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+    
+{% endblock %}

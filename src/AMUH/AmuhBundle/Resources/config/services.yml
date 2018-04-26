@@ -1,0 +1,8 @@
+services:
+#    amuh.example:
+#        class: AMUH\AmuhBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    twig.extension.twigext:
+        class: \AMUH\AmuhBundle\Twig\AmuhExtension
+        tags:
+            - { name: twig.extension }

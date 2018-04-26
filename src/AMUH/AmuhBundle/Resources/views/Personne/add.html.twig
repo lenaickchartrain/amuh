@@ -1,0 +1,51 @@
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.prsNom, 'Nom : ', {'label_attr': {'class': 'col-sm-2 control-label' } }) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.prsNom) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.prsNom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.prsNomJeuneFille, 'Nom de Jeune Fille: ', {'label_attr': {'class': 'col-sm-2 control-label' } }) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.prsNomJeuneFille) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.prsNomJeuneFille, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.prsPrenom, 'Prénom : ', {'label_attr': {'class': 'col-sm-2 control-label' } }) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.prsPrenom) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.prsPrenom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.prsTelephone, 'Téléphone : ', {'label_attr': {'class': 'col-sm-2 control-label' } }) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.prsTelephone) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.prsTelephone, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>  

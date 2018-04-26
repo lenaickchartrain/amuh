@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Consultation - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux consultations
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_consultation_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_consultation_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    <div>{{ "now"|date('d/m/Y H:i:s') }}</div>    
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Médecin</th><th colspan="4">Patient</th><th>Etat</th><th>Editer</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for consultation in consultations %}
+         {{ dump(consultation.consultationDatas) }} 
+         <tr><td>{{ consultation.idConsultation }}</td><td>{% if consultation.medecin.prsNom is defined %}{{ consultation.medecin.prsNom }}{% endif %} {% if consultation.medecin.prsPrenom is defined %}{{ consultation.medecin.prsPrenom }}{% endif %}</td><td>{{ consultation.consultationDatas[0].csdValeur }} {{ consultation.consultationDatas[1].csdValeur }}</td><td>{{ consultation.consultationDatas[2].csdValeur }} ans </td><td>{{ consultation.consultationDatas[3].csdValeur }}</td><td>{% if consultation.consultationDatas[4].csdValeur is orientation %}{{ consultation.consultationDatas[4].csdValeur.oriLibelle }}{% endif %}</td><td> {{ consultation.cstEtat }}</td><td><a href="{{ path('amuh_consultation_edit',{'idConsultation': consultation.idconsultation}) }}">Editer</a></td><td><a href="{{ path('amuh_consultation_delete', {'idConsultation': consultation.idConsultation}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

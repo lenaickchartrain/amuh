@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Role - Index {% endblock %}
+
+{% block body %} 
+    {% for message in app.session.flashbag.get('error') %}
+        {{ message }}
+    {% endfor %}
+    
+    Bienvenue dans la partie réservée aux catégories d'attribut
+    
+    {% block menu %}
+        <ul>
+            <li><a href="{{ path('amuh_role_add') }}">Ajouter</a></li>
+            <li><a href="{{ path('amuh_role_list') }}">Lister</a></li>
+        </ul>
+        
+    {% endblock %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr><th>ID</th><th>Libellé</th><th>Etat</th><th>Etider</th><th>Modifier</th></tr>
+        </thead>
+        <tbody>
+    {% for role in roles %}
+        <tr><td>{{ role.idRole }}</td><td>{{ role.rolLibelle }}</td><td> {{ role.rolEtat }}</td><td><a href="{{ path('amuh_role_edit',{'idRole': role.idRole}) }}">Editer</a></td><td><a href="{{ path('amuh_role_delete', {'idRole': role.idRole}) }}">Supprimer</a></td></tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
