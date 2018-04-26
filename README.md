@@ -14,3 +14,5 @@ Affichage des statistiques
 Les secrétaires:
 Création d'une consultation pour chaque patient venant consulter un médecin.
 Modifications des consultations quand c'est nécessaire.
+
+Projet avorté.
